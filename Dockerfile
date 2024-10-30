@@ -11,8 +11,8 @@ COPY debian.sources /etc/apt/sources.list.d/debian.sources
 # 设置仓颉sdk
 COPY Cangjie.tar.gz /root
 RUN tar xvf /root/Cangjie.tar.gz
-RUN source  /root/cangjie/envsetup.sh
-RUN cjc -v
+RUN echo 'sh /root/cangjie/envsetup.sh' >> /root/.bashrc
+
 
 # 更新软件包并安装依赖
 RUN apt update && \
