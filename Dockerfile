@@ -46,9 +46,9 @@ RUN echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config && \
 RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debian.sources
 
 # 启动 SSH 服务
-WORKDIR /
+WORKDIR /root
 ENTRYPOINT ["service", "ssh", "start", "-D"]
 
-# docker --debug build --no-cache  -t cangjie:local -f Dockerfile_cn .
-# docker run -d --name cangjie -p 8022:22 cangjie:local
+# docker --debug build --no-cache  -t zhangyiming748/cangjie:latest -f Dockerfile .
+# docker run -d --name cangjie -p 8022:22 zhangyiming748/fastcangjie:latest
 # docker exec -it cangjie zsh
