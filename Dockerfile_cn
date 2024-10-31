@@ -50,5 +50,5 @@ WORKDIR /
 ENTRYPOINT ["service", "ssh", "start", "-D"]
 
 # docker --debug build --no-cache  -t cangjie:local -f Dockerfile_cn .
-# docker run -d --name cangjie -p 8022:22 cangjie:local
+# docker run --restart no -d --name cangjie -p 8022:22 cangjie:local
 # docker exec -it cangjie zsh

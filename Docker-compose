@@ -1,0 +1,10 @@
+name: cangjie
+services:
+    fastcangjie:
+        restart: no
+        container_name: cangjie
+        ports:
+            - 8022:22
+        volumes:
+            - /path/to/save/data:/data
+        image: zhangyiming748/fastcangjie:latest
