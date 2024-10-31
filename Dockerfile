@@ -1,7 +1,7 @@
 # 更新软件包并安装依赖
 RUN apt update && \
     apt install -y --no-install-recommends \
-    build-essential openssh-server zsh zsh&& \
+    build-essential openssh-server zsh && \
     apt clean && \
     rm -rf /var/lib/apt/lists/*
 
