@@ -1,3 +1,18 @@
+FROM debian:bookworm
+
+LABEL authors="zen"
+
+# 设置非交互模式
+ENV DEBIAN_FRONTEND=noninteractive
+
+# 更换完整源
+COPY debian.sources /etc/apt/sources.list.d/debian.sources
+
+# 设置仓颉sdk
+COPY Cangjie.tar.gz /root
+RUN tar xvf /root/Cangjie.tar.gz
+RUN echo 'source /cangjie/envsetup.sh' >> /root/.zshrc
+
 # 更新软件包并安装依赖
 RUN apt update && \
     apt install -y --no-install-recommends \
@@ -27,6 +42,13 @@ RUN chsh -s /usr/bin/zsh
 RUN echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config && \
     echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config
 
+# 天朝特色：更换源
+RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list.d/debian.sources
+
 # 启动 SSH 服务
 WORKDIR /
 ENTRYPOINT ["service", "ssh", "start", "-D"]
+
+# docker --debug build --no-cache  -t cangjie:local -f Dockerfile_cn .
+# docker run -d --name cangjie -p 8022:22 cangjie:local
+# docker exec -it cangjie zsh
